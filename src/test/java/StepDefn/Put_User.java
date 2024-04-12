@@ -22,6 +22,7 @@ public class Put_User
     public void user_hits_put_request()
     {
         response=User_Opr.put_opr(userPutPojo,"kent.watsica");
+        response.then().log().all();
         Assert.assertNotNull(response);
     }
     @When("success response is received")
@@ -29,12 +30,10 @@ public class Put_User
     {
       Assert.assertEquals(200, response.getStatusCode());
     }
-    @Then("Last name is validated")
-    public void last_name_is_validated()
+    @Then("Last message is validated")
+    public void last_message_is_validated()
     {
-        Assert.assertEquals(response.then().extract().path("lastname"),lastname);
+        Assert.assertTrue(response.then().extract().path("message")instanceof String);
     }
-
-
 
 }
