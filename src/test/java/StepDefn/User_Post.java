@@ -12,13 +12,12 @@ import io.restassured.response.Response;
 public class User_Post {
     Response response;
     public static User_Post_Pojo UPPayload = new User_Post_Pojo();
-    public User_Post() throws JsonProcessingException {
-    }
     ObjectMapper mapper = new ObjectMapper();
-    String request = mapper.writeValueAsString(UPPayload);
-    String WrappedString = "["+request+"]";
+    String request;
+    String WrappedString;
+
     @Before()
-    public void TestData() {
+    public void TestData() throws JsonProcessingException {
         Faker fake = new Faker();
         UPPayload.setId(fake.idNumber().hashCode());
         UPPayload.setUsername(fake.name().username());
@@ -28,6 +27,9 @@ public class User_Post {
         UPPayload.setEmail(fake.internet().emailAddress());
         UPPayload.setPhone(fake.phoneNumber().phoneNumber());
         UPPayload.setUserStatus(fake.hashCode());
+
+        request = mapper.writeValueAsString(UPPayload);
+        WrappedString = "["+request+"]";
     }
     @Given("user hits the post request")
     public void user_hits_the_post_request() {

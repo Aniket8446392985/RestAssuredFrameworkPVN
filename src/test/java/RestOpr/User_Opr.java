@@ -13,4 +13,16 @@ public class User_Opr {
                 when().post(UserURI.Base_URL+UserURI.PostUrl);
         return response;
     }
+
+    public static Response Get_opr(String USERNAME){
+        Response response =given().contentType(ContentType.JSON).accept(ContentType.JSON).
+                pathParams("username",USERNAME).log().all().
+                when().get(UserURI.Base_URL+UserURI.getUrl);
+        return response;
+    }
+
+
+
+
+
 }
