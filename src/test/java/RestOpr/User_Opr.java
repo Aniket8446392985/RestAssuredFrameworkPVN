@@ -1,5 +1,6 @@
 package RestOpr;
 
+import Payloads.User_Put_Pojo;
 import URI.UserURI;
 import static io.restassured.RestAssured.given;
 import io.restassured.http.ContentType;
@@ -20,6 +21,17 @@ public class User_Opr {
                 when().get(UserURI.Base_URL+UserURI.getUrl);
         return response;
     }
+
+    public static Response  put_opr(User_Put_Pojo Payload,String PUTUSERNAME)
+    {
+        Response response= given().contentType(ContentType.JSON).accept(ContentType.JSON).
+                pathParams("PutUserName",PUTUSERNAME).
+                body(Payload).log().all().
+                when().put(UserURI.Base_URL+UserURI.PutUrl);
+        return response;
+    }
+
+
 
 
 

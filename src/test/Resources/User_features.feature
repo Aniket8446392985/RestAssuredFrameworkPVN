@@ -6,5 +6,8 @@ Feature:
     Given user hits get request
     When success response received
     Then first name is string
-
+  Scenario:
+    Given User hits Put request
+    When success response is received
+    Then Last name is validated
 
