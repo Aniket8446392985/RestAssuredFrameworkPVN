@@ -1,5 +1,6 @@
 package RestOpr;
 
+import Payloads.PutTestPojo;
 import Payloads.User_Post_Pojo;
 import Payloads.User_Put_Pojo;
 import URI.UserURI;
@@ -10,6 +11,7 @@ import com.github.javafaker.Faker;
 import io.cucumber.core.internal.com.fasterxml.jackson.core.JsonProcessingException;
 import io.cucumber.core.internal.com.fasterxml.jackson.databind.ObjectMapper;
 
+import io.cucumber.java.en.Given;
 import io.restassured.response.Response;
 
 public class User_Opr {
@@ -63,6 +65,14 @@ public class User_Opr {
         Response response= given().contentType(JSON).accept(JSON).
                 pathParams("PutUserName",PUTUSERNAME).
                 body(Payload).log().all().
+                when().put(UserURI.Base_URL+UserURI.PutUrl);
+        return response;
+    }
+
+    public static Response PutTest(PutTestPojo Payload)
+    {
+       Response response = given().contentType(JSON).accept(JSON).
+                body(Payload).
                 when().put(UserURI.Base_URL+UserURI.PutUrl);
         return response;
     }
