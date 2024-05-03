@@ -1,7 +1,7 @@
 Feature:
-  #Scenario:
-   # Given user hits the post request
-    #Then Response code should be pass
+   #Scenario:
+   #Given user hits the post request
+   #Then Response code should be pass
   #Scenario:
    # Given user hits get request
    # When success response received

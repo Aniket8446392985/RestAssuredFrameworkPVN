@@ -2,9 +2,9 @@ package StepDefn;
 
 import Payloads.User_Put_Pojo;
 import RestOpr.User_Opr;
-import URI.UserURI;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.*;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.junit.Assert;
 
@@ -22,6 +22,8 @@ public class Put_User
     public void user_hits_put_request()
     {
         response=User_Opr.put_opr(userPutPojo,"kent.watsica");
+        response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("PutSchema.json"));
+        System.out.println("Schema is validated");
         response.then().log().all();
         Assert.assertNotNull(response);
     }
