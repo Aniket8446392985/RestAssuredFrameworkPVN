@@ -69,9 +69,10 @@ public class User_Opr {
         return response;
     }
 
-    public static Response PutTest(PutTestPojo Payload)
+    public static Response PutTest(PutTestPojo Payload,String name)
     {
        Response response = given().contentType(JSON).accept(JSON).
+               pathParams("PutUserName",name).
                 body(Payload).
                 when().put(UserURI.Base_URL+UserURI.PutUrl);
         return response;

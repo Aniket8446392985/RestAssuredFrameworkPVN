@@ -7,6 +7,7 @@ import io.cucumber.messages.types.Background;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.junit.Assert;
+import org.junit.Before;
 
 public class PutTest {
     PutTestPojo ptp=new PutTestPojo();
@@ -19,14 +20,14 @@ public class PutTest {
     @Given("User create the request and hits the API")
     public void user_create_the_request_and_hits_the_api()
     {
-        response = User_Opr.PutTest(ptp);
+        response = User_Opr.PutTest(ptp,"kent.watsica");
         //response.then().log().all();
         Assert.assertNotNull(response);
     }
     @Then("Schema will be validated")
     public void schema_will_be_validated()
     {
-        response.then().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("PutRequest.feature"));
+        response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("PutSchema.json"));
     }
 
 }
